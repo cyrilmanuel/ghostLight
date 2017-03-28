@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelControls : MonoBehaviour {
-    private Rigidbody level;
+    public Toggle snap;
 	// Use this for initialization
-	void Start () {
-        level = GetComponent<Rigidbody>();
+	void Awake () {
+
 	}
 	
 	// Update is called once per frame
@@ -17,7 +18,7 @@ public class LevelControls : MonoBehaviour {
     // Update is called regardless of frame activity
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (snap.isOn)
         {
             float x = Input.GetAxis("Vertical");
             float z = Input.GetAxis("Horizontal");
