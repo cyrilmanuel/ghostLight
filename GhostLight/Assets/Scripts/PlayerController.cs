@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour {
-
+public class PlayerController : MonoBehaviour {
+    private float speed;
 	// Use this for initialization
 	void Start () {
-		
+        speed = 0.025f;
 	}
 
     // Update is called regardless of frame activity
@@ -14,7 +14,8 @@ public class CharacterController : MonoBehaviour {
     {
         float x = Input.GetAxis("HorizontalArrow");
         float z = Input.GetAxis("VerticalArrow");
-        transform.position = new Vector3(x,transform.position.y,z);
+        transform.Translate(transform.forward * (speed) * z);
+        transform.Rotate(transform.up, x*0.25f/speed);
     }
 
     // Update is called once per frame
