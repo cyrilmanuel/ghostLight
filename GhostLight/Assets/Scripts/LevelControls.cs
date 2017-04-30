@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelControls : MonoBehaviour {
+public class LevelControls : MonoBehaviour
+{
     private bool snap;
     private Vector3[] snapVectors;
     private Vector3[] snapRotations;
     private Vector3 normal;
-	// Use this for initialization
-	void Awake () {
+    private float snapthreshold;
+    // Use this for initialization
+    void Awake()
+    {
         snap = false;
-        snapRotations = new Vector3[] { new Vector3(0, 0, 0), new Vector3(90, 0, 0), new Vector3(0, 90, 90), new Vector3(0, 270, 270) };
+        snapRotations = new Vector3[] {
+            new Vector3(0, 0, 0), //Up
+            new Vector3(90, 0, 180), //South
+            new Vector3(0, 90, 270), //East
+            new Vector3(0, 270, 90), //West
+            new Vector3(270,0,0), //North
+            new Vector3(360,0,0) //Down
+        };
         snapVectors = new Vector3[] {
             new Vector3(0,1,0), //Up
             new Vector3(0, 0, 1), //South
@@ -21,12 +31,14 @@ public class LevelControls : MonoBehaviour {
             new Vector3(0, -1, 0) //Down
         };
         normal = new Vector3(0, 1, 0);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        snapthreshold = 20.0f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     // Update is called regardless of frame activity
     void FixedUpdate()
@@ -40,44 +52,52 @@ public class LevelControls : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space)) { snap = !snap; }
         if (!snap)
         {
-            print("X: " + angleX + " Y: " + angleY + " Z: " + angleZ);
-            RotateLevel(x,y,z);
+            //print("X: " + angleX + " Y: " + angleY + " Z: " + angleZ);
+            RotateLevel(x, y, z);
         }
-        else {
-            RotateLevel(x,y,z);
+        else
+        {
+            RotateLevel(x, y, z);
             //--------------------SNAPS LEVEL POSITION TO NEAREST FACE-------------------------------------------------
             {
-                print("Close to Origin: " + normal +" - "+ snapVectors[0] + " = " + Vector3.Angle(normal, snapVectors[0]));
-                if (Vector3.Angle(normal, snapVectors[0]) < 10.0f)
+                //print("Close to Origin: " + normal + " - " + snapVectors[5] + " = " + Vector3.Angle(snapVectors[5], normal));
+                if (Vector3.Angle(normal, snapVectors[0]) < snapthreshold)
                 {
                     transform.eulerAngles = snapRotations[0];
                     snap = false;
-                }/*
-                if (Vector3.Distance(transform.eulerAngles, snapAngles[3]) < 5.0f)
+                }
+                if (Vector3.Angle(normal, snapVectors[1]) < snapthreshold)
                 {
-                    transform.eulerAngles = snapAngles[3];
+                    transform.eulerAngles = snapRotations[1];
                     snap = false;
                 }
-                if (Vector3.Distance(transform.eulerAngles, snapAngles[0]) < 5.0f || Vector3.Distance(transform.eulerAngles, snapAngles[0]) > 355.0f)
+                if (Vector3.Angle(normal, snapVectors[2]) < snapthreshold)
                 {
-                    transform.eulerAngles = snapAngles[0];
+                    transform.eulerAngles = snapRotations[2];
                     snap = false;
                 }
-                if (Vector3.Distance(transform.eulerAngles, snapAngles[1]) < 10.0f || Vector3.Distance(transform.eulerAngles, snapAngles[1]) > 254.0f)
+                if (Vector3.Angle(normal, snapVectors[3]) < snapthreshold)
                 {
-                    transform.eulerAngles = snapAngles[1];
+                    transform.eulerAngles = snapRotations[3];
                     snap = false;
-                }*/
+                }
+                if (Vector3.Angle(normal, snapVectors[4]) < snapthreshold)
+                {
+                    transform.eulerAngles = snapRotations[4];
+                    snap = false;
+                }
+                if (Vector3.Angle(normal, snapVectors[5]) < snapthreshold)
+                {
+                    transform.eulerAngles = snapRotations[5];
+                    snap = false;
+                }
             }
-           
         }
-        
+
     }
-    void RotateLevel(float x, float y, float z) {
+    void RotateLevel(float x, float y, float z)
+    {
         normal = Quaternion.Euler(x, y, -z) * normal;
         transform.Rotate(new Vector3(x, y, -z));
-    }
-    public void ChangeSnap() {
-        if (Input.GetKey(KeyCode.Space)) { snap = !snap; }
     }
 }
