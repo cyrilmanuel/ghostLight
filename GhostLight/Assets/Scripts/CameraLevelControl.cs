@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelControls : MonoBehaviour
+public class CameraLevelControl : MonoBehaviour
 {
     private bool snap;
     private Vector3[] snapVectors;
     private Vector3[] snapRotations;
     private Vector3 normal;
     private float snapthreshold;
+    public GameObject levelbase;
     // Use this for initialization
     void Awake()
     {
@@ -43,21 +44,19 @@ public class LevelControls : MonoBehaviour
     // Update is called regardless of frame activity
     void FixedUpdate()
     {
-        float x = Input.GetAxis("Vertical");
-        float z = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Rotate");
-        float angleX = transform.rotation.eulerAngles.x;
-        float angleY = transform.rotation.eulerAngles.y;
-        float angleZ = transform.rotation.eulerAngles.z;
+        float pitch = Input.GetAxis("Vertical");
+        float roll = Input.GetAxis("Horizontal");
+        float yaw = Input.GetAxis("Rotate");
         if (Input.GetKeyDown(KeyCode.Space)) { snap = !snap; }
         if (!snap)
         {
             //print("X: " + angleX + " Y: " + angleY + " Z: " + angleZ);
-            RotateLevel(x, y, z);
+            RotateLevel(roll, pitch, yaw);
+            
         }
         else
         {
-            RotateLevel(x, y, z);
+            RotateLevel(roll, pitch, yaw);
             //--------------------SNAPS LEVEL POSITION TO NEAREST FACE-------------------------------------------------
             {
                 //print("Close to Origin: " + normal + " - " + snapVectors[5] + " = " + Vector3.Angle(snapVectors[5], normal));
@@ -95,9 +94,12 @@ public class LevelControls : MonoBehaviour
         }
 
     }
-    void RotateLevel(float x, float y, float z)
+    void RotateLevel(float roll, float pitch, float yaw)
     {
-        normal = Quaternion.Euler(x, y, -z) * normal;
-        transform.Rotate(new Vector3(x, y, -z));
+        //normal = Quaternion.Euler(x, y, -z) * normal;
+        transform.LookAt(levelbase.transform);
+        transform.Rotate(new Vector3(0, 0, 1), yaw*360/Mathf.PI);
+        transform.RotateAround(new Vector3(0, 0, 0), new Vector3(0, 1, 0), -roll);
+        transform.RotateAround(new Vector3(0, 0, 0), new Vector3(1, 0, 0), pitch);
     }
 }
