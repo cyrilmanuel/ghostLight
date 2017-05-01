@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CameraLevelControl : MonoBehaviour
 {
     private bool snap;
+    private bool max;
     private Vector3[] snapVectors;
     private Vector3[] snapRotations;
     private Vector3 normal;
@@ -17,6 +18,7 @@ public class CameraLevelControl : MonoBehaviour
     {
         snap = false;
         snapthreshold = 20.0f;
+        max = false;
         snapVectors = new Vector3[] {
             new Vector3(0,distance,0), //Up
             new Vector3(0, 0, distance), //South
@@ -57,7 +59,6 @@ public class CameraLevelControl : MonoBehaviour
                 if (Vector3.Angle(transform.forward, snapVectors[4]) < snapthreshold)
                 {
                     transform.position = snapVectors[1];
-
                     transform.LookAt(levelbase.transform);
                     snap = false;
                 }
@@ -70,21 +71,18 @@ public class CameraLevelControl : MonoBehaviour
                 if (Vector3.Angle(transform.forward, snapVectors[2]) < snapthreshold)
                 {
                     transform.position = snapVectors[3];
-
                     transform.LookAt(levelbase.transform);
                     snap = false;
                 }
                 if (Vector3.Angle(transform.forward, snapVectors[1]) < snapthreshold)
                 {
                     transform.position = snapVectors[4];
-
                     transform.LookAt(levelbase.transform);
                     snap = false;
                 }
                 if (Vector3.Angle(transform.forward, snapVectors[0]) < snapthreshold)
                 {
                     transform.position = snapVectors[5];
-
                     transform.LookAt(levelbase.transform);
                     snap = false;
                 }
@@ -95,7 +93,7 @@ public class CameraLevelControl : MonoBehaviour
     void RotateLevel(float roll, float pitch)
     {
         transform.LookAt(levelbase.transform);
-        transform.RotateAround(new Vector3(0, 0, 0), transform.up, -roll);
+        transform.RotateAround(new Vector3(0, 0, 0), transform.up, -roll*((transform.rotation.x%90 + 1)));
         transform.RotateAround(new Vector3(0, 0, 0), transform.right, pitch);
     }
 }
