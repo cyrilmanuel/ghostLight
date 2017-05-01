@@ -38,7 +38,6 @@ public class LevelControler : MonoBehaviour
                 playersafe = false;
             }
         }
-        print("Safe? " + playersafe);
         if (deathBox.GetComponent<DeathBox>().isPlayerTouching() && !playersafe) {
             SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         }
