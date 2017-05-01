@@ -26,7 +26,7 @@ public class menuPrincipal : MonoBehaviour {
 			print ("Game loaded!");
 		} else {
 			// no save !
-			txtNoSave.text = "Aucune sauvegarde trouvé !";
+			txtNoSave.text = "Aucune partie trouvée !";
 
 		}
 	}

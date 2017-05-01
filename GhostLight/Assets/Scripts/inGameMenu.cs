@@ -13,11 +13,25 @@ public class inGameMenu : MonoBehaviour {
 	bool isPaused;
 	Texture fadeTexture;
 	public Text muteText;
+	public Text stateText;
 
 	// Use this for initialization
 	void Start () {
 		isPaused = false;
-		isMuted = false;
+
+		if (PlayerPrefs.HasKey("Mute")) {
+			if (PlayerPrefs.GetInt ("Mute") != 0) {
+				isMuted = true;
+			} else {
+				isMuted = false;
+			}
+
+		} else {
+			isMuted = false;
+		}
+
+
+
 		PauseMenu = GameObject.Find("PauseMenu"); 
 		BaseLevel = GameObject.Find("BaseLevel");
 		GameObject audio = GameObject.Find("MusiqueManager"); 
@@ -32,6 +46,7 @@ public class inGameMenu : MonoBehaviour {
 		} else if (!isPaused){
 			PauseMenu.SetActive(false);
 			Time.timeScale = 1;
+			stateText.text = "";
 		}
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -40,12 +55,12 @@ public class inGameMenu : MonoBehaviour {
 
 		if (isMuted) {
 			Audio.mute = true;
-			muteText.text = "unmute";
+			muteText.text = "Activer la musique";
 			//AudioListener.volume = 0;
 		} else {
 			//AudioListener.volume = 1;
 			Audio.mute = false;
-			muteText.text = "mute";
+			muteText.text = "Désactiver la musique";
 		}
 	}
 
@@ -63,14 +78,15 @@ public class inGameMenu : MonoBehaviour {
 	public void saveBtn(){
 		//PlayerPrefs.SetInt("currentSceneSave", SceneManager.LoadScene(SceneManager.GetActiveScene().name));
 		PlayerPrefs.SetInt ("SaveData", SceneManager.GetActiveScene().buildIndex);
+		int i = isMuted ? 1 : 0;
+		PlayerPrefs.SetInt("Mute", i);
 		PlayerPrefs.Save();
-		print ("Game saved!");
+		stateText.text="Partie Sauvegarder !";
 	}
 
 	public void loadBtn(){
 	//	SceneManager.LoadScene(PlayerPrefs.GetInt("currentSceneSave"));
 		SceneManager.LoadScene(PlayerPrefs.GetInt("SaveData"));
-		print ("Game loaded!");
 	}
 
 	public void resumeBtn(){
