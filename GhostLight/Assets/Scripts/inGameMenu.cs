@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class inGameMenu : MonoBehaviour {
 
 	GameObject PauseMenu;
+	GameObject BaseLevel;
 	AudioSource Audio;
 	bool isMuted;
 	bool isPaused;
@@ -17,7 +18,8 @@ public class inGameMenu : MonoBehaviour {
 	void Start () {
 		isPaused = false;
 		isMuted = false;
-		PauseMenu = GameObject.Find("PauseMenu");  
+		PauseMenu = GameObject.Find("PauseMenu"); 
+		BaseLevel = GameObject.Find("BaseLevel");
 		GameObject audio = GameObject.Find("MusiqueManager"); 
 		Audio = audio.GetComponent<AudioSource>();
 	}
