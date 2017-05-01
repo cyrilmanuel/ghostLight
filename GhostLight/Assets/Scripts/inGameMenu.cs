@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Text;
+using UnityEngine.UI;
 
 public class inGameMenu : MonoBehaviour {
 
 	GameObject PauseMenu;
+	AudioSource Audio;
 	bool isMuted;
 	bool isPaused;
+	Texture fadeTexture;
+	public Text muteText;
 
 	// Use this for initialization
 	void Start () {
 		isPaused = false;
 		isMuted = false;
-		PauseMenu = GameObject.Find ("PauseMenu"); 
+		PauseMenu = GameObject.Find("PauseMenu");  
+		GameObject audio = GameObject.Find("MusiqueManager"); 
+		Audio = audio.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -28,15 +33,17 @@ public class inGameMenu : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-
-			print("caca");
 			isPaused = !isPaused;
 		}
 
 		if (isMuted) {
-			AudioListener.volume = 0;
+			Audio.mute = true;
+			muteText.text = "unmute";
+			//AudioListener.volume = 0;
 		} else {
-			AudioListener.volume = 1;
+			//AudioListener.volume = 1;
+			Audio.mute = false;
+			muteText.text = "mute";
 		}
 	}
 
