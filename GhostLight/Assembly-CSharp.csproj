@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraLevelControl.cs" />
-     <Compile Include="Assets\Scripts\CharacterController.cs" />
+     <Compile Include="Assets\Scripts\LevelControler.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\inGameMenu.cs" />
      <Compile Include="Assets\Scripts\menuPrincipal.cs" />
+     <Compile Include="Assets\cha_data\Script\ScreenShot.cs" />
      <None Include="Assets\font\final_fantasy\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
