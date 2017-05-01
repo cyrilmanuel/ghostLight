@@ -7,10 +7,10 @@ public class menuPrincipal : MonoBehaviour {
 
 	public void newGameBtn(string newGameLevel)
 	{	
-		SceneManager.LoadScene (newGameLevel);
+		SceneManager.LoadScene(newGameLevel);
 	}
 
-	public void exitGameBtn(string newGameLevel)
+	public void exitGameBtn()
 	{
 		Application.Quit();
 	}
