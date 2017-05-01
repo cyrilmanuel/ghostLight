@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CameraLevelControl : MonoBehaviour
 {
     private bool snap;
-    private bool max;
     private Vector3[] snapVectors;
     private Vector3[] snapRotations;
     private Vector3 normal;
@@ -18,7 +17,6 @@ public class CameraLevelControl : MonoBehaviour
     {
         snap = false;
         snapthreshold = 20.0f;
-        max = false;
         snapVectors = new Vector3[] {
             new Vector3(0,distance,0), //Up
             new Vector3(0, 0, distance), //South

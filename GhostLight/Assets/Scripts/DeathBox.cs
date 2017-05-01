@@ -4,32 +4,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathBox : MonoBehaviour {
-    private GameObject player;
     private GameObject levelbase;
     private BoxCollider box;
     public float height;
+    private bool playertouching;
 	// Use this for initialization
 	void Start () {
 		
 	}
 
     void Awake() {
-        player = GameObject.Find("Player");
         levelbase = GameObject.Find("LevelBottom");
         box = GetComponent<BoxCollider>() as BoxCollider;
+        playertouching = true;
         box.size = new Vector3(levelbase.transform.localScale.x, height, levelbase.transform.localScale.z);
     }
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
 
-    void OnCollisionEnter(Collision col)
+    }
+
+    void OnCollisionExit(Collision col)
     {
+        print(col.gameObject.name);
         if (col.gameObject.name == "Player")
         {
-            player.GetComponent<PlayerController>().alive = false;
+            playertouching = false;
         }
+    }
+
+    public bool isPlayerTouching() {
+        return playertouching;
     }
 }

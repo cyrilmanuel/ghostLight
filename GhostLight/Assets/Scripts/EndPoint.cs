@@ -17,7 +17,7 @@ public class EndPoint : MonoBehaviour {
 
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.name == "Player") {
-            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1));
+            GetComponentInParent<LevelControler>().SetPlayerWon(true);
         }
     }
 }
