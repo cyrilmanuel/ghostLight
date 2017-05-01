@@ -50,11 +50,9 @@ public class LevelControler : MonoBehaviour
     public void SetPlayerWon(bool win)
     {
         playerwon = win;
-        print("Playerwon? " + playerwon);
     }
     public void SetPlayerSafe(bool safe)
     {
         playersafe = safe;
-        print("Playersafe? " + playersafe);
     }
 }

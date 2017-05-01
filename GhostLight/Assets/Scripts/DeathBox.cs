@@ -27,7 +27,6 @@ public class DeathBox : MonoBehaviour {
 
     void OnCollisionExit(Collision col)
     {
-        print(col.gameObject.name);
         if (col.gameObject.name == "Player")
         {
             playertouching = false;

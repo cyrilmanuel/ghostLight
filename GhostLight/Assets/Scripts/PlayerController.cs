@@ -19,8 +19,10 @@ public class PlayerController : MonoBehaviour {
     {
         float x = Input.GetAxis("HorizontalArrow");
         float z = Input.GetAxis("VerticalArrow");
-        transform.position += transform.forward * (speed) * z;
-        transform.Rotate(transform.up, x * (1 / (2 * speed)));
+		if (SplashOnLoad.isFinished) {
+			transform.position += transform.forward * (speed) * z;
+			transform.Rotate (transform.up, x * (1 / (2 * speed)));
+		}
     }
 
     // Update is called once per frame

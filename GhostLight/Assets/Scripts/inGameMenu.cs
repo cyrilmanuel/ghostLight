@@ -14,6 +14,7 @@ public class inGameMenu : MonoBehaviour {
 	Texture fadeTexture;
 	public Text muteText;
 	public Text stateText;
+	private static bool isFinishedSplash;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +41,7 @@ public class inGameMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		isFinishedSplash = SplashOnLoad.isFinished;
 		if (isPaused) {
 			PauseMenu.SetActive(true);
 			Time.timeScale = 0;
@@ -49,7 +51,7 @@ public class inGameMenu : MonoBehaviour {
 			stateText.text = "";
 		}
 
-		if (Input.GetKeyDown(KeyCode.Escape)) {
+		if (Input.GetKeyDown(KeyCode.Escape) && isFinishedSplash) {
 			isPaused = !isPaused;
 		}
 

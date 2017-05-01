@@ -38,7 +38,7 @@ public class CameraLevelControl : MonoBehaviour
     {
         float pitch = Input.GetAxis("Vertical");
         float roll = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space)) { snap = !snap; }
+		if (Input.GetKeyDown(KeyCode.Space) && SplashOnLoad.isFinished) { snap = !snap; }
         if (!snap)
         {
             RotateLevel(roll, pitch);
@@ -90,8 +90,10 @@ public class CameraLevelControl : MonoBehaviour
     }
     void RotateLevel(float roll, float pitch)
     {
+		if(SplashOnLoad.isFinished){
         transform.LookAt(levelbase.transform);
         transform.RotateAround(new Vector3(0, 0, 0), transform.up, -roll*((transform.rotation.x%90 + 1)));
         transform.RotateAround(new Vector3(0, 0, 0), transform.right, pitch);
-    }
+		}
+	}
 }
