@@ -53,10 +53,15 @@ public class inGameMenu : MonoBehaviour {
 
 	public void saveBtn(){
 		//PlayerPrefs.SetInt("currentSceneSave", SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+		PlayerPrefs.SetInt ("SaveData", SceneManager.GetActiveScene().buildIndex);
+		PlayerPrefs.Save();
+		print ("Game saved!");
 	}
 
 	public void loadBtn(){
 	//	SceneManager.LoadScene(PlayerPrefs.GetInt("currentSceneSave"));
+		SceneManager.LoadScene(PlayerPrefs.GetInt("SaveData"));
+		print ("Game loaded!");
 	}
 
 	public void resumeBtn(){

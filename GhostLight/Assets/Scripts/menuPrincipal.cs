@@ -14,4 +14,15 @@ public class menuPrincipal : MonoBehaviour {
 	{
 		Application.Quit();
 	}
+
+	public void continueBtn()
+	{
+		if (PlayerPrefs.HasKey ("SaveData")) {
+
+		} else {
+			// no save !
+			SceneManager.LoadScene(PlayerPrefs.GetInt("SaveData"));
+			print ("Game loaded!");
+		}
+	}
 }
