@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraLevelControl.cs" />
+    <Compile Include="Assets\Scripts\DeathBox.cs" />
+    <Compile Include="Assets\Scripts\EndPoint.cs" />
     <Compile Include="Assets\Scripts\LevelControler.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\menuPrincipal.cs" />
