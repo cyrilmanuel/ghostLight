@@ -29,12 +29,14 @@ public class LevelControler : MonoBehaviour
         {
             if (light.GetComponentInChildren<MeshCollider>().bounds.Contains(player.transform.position))
             {
-                print("Player in " + light.name);
                 playersafe = true;
+                if (light.name == "LightExit")
+                {
+                    playerwon = true;
+                }
                 break;
             }
             else {
-                print("Player not in " + light.name);
                 playersafe = false;
             }
         }
@@ -42,13 +44,17 @@ public class LevelControler : MonoBehaviour
             SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         }
         if (playerwon) {
-            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1));
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1));
+            else
+                SceneManager.LoadScene(0);
         }
 
 	}
 
     public void SetPlayerWon(bool win)
     {
+        print("We're here!");
         playerwon = win;
     }
     public void SetPlayerSafe(bool safe)

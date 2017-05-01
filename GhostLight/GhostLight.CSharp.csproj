@@ -99,9 +99,7 @@
     <Compile Include="Assets\LightShafts\LightShafts.cs" />
     <Compile Include="Assets\Scripts\CameraLevelControl.cs" />
     <Compile Include="Assets\Scripts\CinematicManager.cs" />
-    <Compile Include="Assets\Scripts\ConeCollider.cs" />
     <Compile Include="Assets\Scripts\DeathBox.cs" />
-    <Compile Include="Assets\Scripts\EndPoint.cs" />
     <Compile Include="Assets\Scripts\LevelControler.cs" />
     <Compile Include="Assets\Scripts\LightControler.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
